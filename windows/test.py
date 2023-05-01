@@ -7,7 +7,7 @@ class MainWindow:
         self.root.title("MainWindow")
         self.root.geometry(f"{width}x{height}")
         self.root.configure(background='pink')
-
+#dflkkkdkd
         # создаем Canvas
         self.canvas = tk.Canvas(self.root, width=width, height=height)
         self.canvas.pack(fill="both", expand=True)
