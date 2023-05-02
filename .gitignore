@@ -1,0 +1,20 @@
+# PyCharm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Visual Studio
+*.suo
+*.user
+*.sln.docstates
+*.sln.cache
+*.suo
+*.user
+*.vshost.*
+bin/
+obj/
