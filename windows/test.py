@@ -7,7 +7,7 @@ class MainWindow:
         self.root.title("MainWindow")
         self.root.geometry(f"{width}x{height}")
         self.root.configure(background='pink')
-#dflkkkdkd
+
         # создаем Canvas
         self.canvas = tk.Canvas(self.root, width=width, height=height)
         self.canvas.pack(fill="both", expand=True)
@@ -38,11 +38,13 @@ class MainWindow:
         button1 = tk.Button(self.root, text="Login", width=20, height=3, font=("Arial", 13), command=self.open_login_window)
         button2 = tk.Button(self.root, text="Registration", width=20, height=3, font=("Arial", 13), command=self.open_registration_window)
         button3 = tk.Button(self.root, text="Exit", width=8, height=2, command=self.close_window, font=("Arial", 10))
+        button4 = tk.Button(self.root, text="Admin", width=8, height=2, font=("Arial", 13), command=self.open_administration_window)
 
         # добавляем кнопки на Canvas
         self.canvas.create_window(self.width//2, self.height//2 - 100, window=button1)
         self.canvas.create_window(self.width//2, self.height//2, window=button2)
         self.canvas.create_window(self.width//2 + 300, self.height//2 + 300, window=button3)
+        self.canvas.create_window(self.width//2 - 300, self.height//2 + 300, window=button4)
 
     def close_window(self):
         self.root.destroy()
@@ -54,7 +56,10 @@ class MainWindow:
     def open_registration_window(self):
         # создаем экземпляр класса AddWindow
         RegistrationWindow()
-
+        
+    def open_administration_window(self):
+        # создаем экземпляр класса AddWindow
+        AdminWindow()
 
 class RegistrationWindow:
     def __init__(self, width=900, height=700):
@@ -199,7 +204,57 @@ class LoginWindow:
         self.password_entry.grid(row=1, column=1, pady= 10)
         
         self.canvas.create_window(500, 300, window=frame2)
+        
+class AdminWindow:
+    def __init__(self, width=900, height=700):
+        self.width = width
+        self.height = height
+        self.root = tk.Tk()
+        self.root.title("MainWindow")
+        self.root.geometry(f"{width}x{height}")
+        self.root.configure(background='pink')
 
+        # создаем Canvas
+        self.canvas = tk.Canvas(self.root, width=width, height=height)
+        self.canvas.pack(fill="both", expand=True)
+        # устанавливаем фон Canvas
+        self.canvas.config(bg='pink')
+
+        self.draw_walls()
+        self.create_buttons()
+        self.create_input_field()
+        self.root.mainloop()
+        
+    
+    def draw_walls(self):
+        # размер отступа от края окна
+        padding = 20
+        # координаты угловых точек
+        x1, y1 = padding, padding
+        x2, y2 = self.width - padding, self.height - padding
+        # верхняя горизонтальная линия
+        self.canvas.create_text((x1+x2)//2, y1-10, text="═"*(x2-x1), font=("Courier New", 12), fill="white")
+        # нижняя горизонтальная линия
+        self.canvas.create_text((x1+x2)//2, y2+10, text="═"*(x2-x1), font=("Courier New", 12), fill="white")
+        # левая вертикальная линия
+        self.canvas.create_text(x1-10, (y1+y2)//2, text="\n".join(["║"]*(y2-y1)), font=("Courier New", 12), fill="white")
+        # правая вертикальная линия
+        self.canvas.create_text(x2+10, (y1+y2)//2, text="\n".join(["║"]*(y2-y1)), font=("Courier New", 12), fill="white")
+        
+    def create_buttons(self):
+        # создаем кнопки
+        button1 = tk.Button(self.root, text="Change", width=15, height=3, font=("Arial", 9))#, command=self.open_book_window)
+        button2 = tk.Button(self.root, text="Cancel", width=15, height=3, font=("Arial", 9), command=self.close_AdminWindow)
+        button3 = tk.Button(self.root, text="delete", width=15, height=3, font=("Arial", 9))#, #command=self.)
+
+        # добавляем кнопки на Canvas
+        self.canvas.create_window(self.width//2 - 70, self.height//2, window=button1)
+        self.canvas.create_window(self.width//2 + 300, self.height//2 + 300, window=button2)
+        self.canvas.create_window(self.width//2 + 70, self.height//2, window=button3)
+    def close_AdminWindow(self):
+        # Скрываем главное окно
+        self.root.withdraw()
+    
 class BookWindow:
     def __init__(self, width=900, height=700):
         self.width = width
