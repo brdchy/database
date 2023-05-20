@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from Database import Database
+
 from tkinter import Entry
 
 
