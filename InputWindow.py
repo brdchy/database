@@ -1,14 +1,16 @@
 import tkinter as tk
-
+from tkinter import Entry
 
 class InputWindow:
     def __init__(self, width=900, height=700):
         self.width = width
         self.height = height
         self.root = tk.Tk()
-        self.root.title("MainWindow")
+        self.root.title("InputWindow")
         self.root.geometry(f"{width}x{height}")
         self.root.configure(background='pink')
+        self.name_valid = False
+        self.number_valid = False
 
         # создаем Canvas
         self.canvas = tk.Canvas(self.root, width=width, height=height)
@@ -40,17 +42,60 @@ class InputWindow:
 
     def create_buttons(self):
         # создаем кнопки
-        button1 = tk.Button(self.root, text="Ok", width=15, height=3, font=("Arial", 9))
-        button2 = tk.Button(self.root, text="Cancel", width=15, height=3, font=("Arial", 9),
-                            command=self.close_InputWindow)
+        button1 = tk.Button(self.root, text="Ok", width=15, height=3, font=("Arial", 9), command=self.save_InputWindow)
+        button2 = tk.Button(self.root, text="Cancel", width=15, height=3, font=("Arial", 9), command=self.close_InputWindow)
 
         # добавляем кнопки на Canvas
         self.canvas.create_window(self.width // 2 - 300, self.height // 2 + 300, window=button1)
         self.canvas.create_window(self.width // 2 + 300, self.height // 2 + 300, window=button2)
 
+    # команда для кнопки OK
+    def save_InputWindow(self):
+        self.validate_name()
+        self.validate_number()
+
+        if not self.name_valid:
+            self.show_error_window("Name must contain only letters. Please try again.")
+            return
+
+        if not self.number_valid:
+            self.show_error_window("Number must be equal to 11 characters and contain only numbers. Please try again.")
+            return
+
     def close_InputWindow(self):
         # Скрываем главное окно
         self.root.withdraw()
+
+    # устанавливаем параметры для окна ошибок
+    def show_error_window(self, message):
+        error_window = tk.Toplevel(self.root)
+        error_window.title("Error")
+        error_window.geometry("300x150")
+
+        error_message = tk.Message(error_window, text=message, width=250, font=("Arial", 12))
+        error_message.pack(pady=10)
+
+        button_frame = tk.Frame(error_window)
+        button_frame.pack()
+
+        ok_button = tk.Button(button_frame, text="OK", command=error_window.destroy)
+        ok_button.pack(pady=5)
+
+    # валидация номера
+    def validate_number(self):
+        number = self.number_entry.get()
+        if number.isdigit() and len(number) == 11:  # Проверяем, что номер состоит только из цифр и имеет длину 11 символов
+            self.number_valid = True
+        else:
+            self.number_valid = False
+
+    # валидация имени
+    def validate_name(self):
+        name = self.name_entry.get()
+        if any(char.isdigit() or not char.isalpha() for char in name):
+            self.name_valid = False
+        else:
+            self.name_valid = True
 
     def create_input_field(self):
         # блок с названиями
@@ -65,11 +110,13 @@ class InputWindow:
         # блок с полями ввода
         frame2 = tk.Frame(self.root, background="pink")
 
-        self.name_entry = tk.Text(frame2, width=40, height=1, font=("Arial", 12))
+        self.name_entry = Entry(frame2, width=40, font=("Arial", 12))
         self.name_entry.grid(row=0, column=1, pady=10)
+        self.name_entry.bind("<FocusOut>", lambda event: self.validate_name())
 
-        self.number_entry = tk.Text(frame2, width=40, height=1, font=("Arial", 12))
+        self.number_entry = Entry(frame2, width=40, font=("Arial", 12))
         self.number_entry.grid(row=1, column=1, pady=10)
+        self.number_entry.bind("<FocusOut>", lambda event: self.validate_number())
 
         # выпадающий список
         self.selected_time = tk.StringVar(frame2)

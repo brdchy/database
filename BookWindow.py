@@ -8,7 +8,7 @@ class BookWindow:
         self.width = width
         self.height = height
         self.root = tk.Tk()
-        self.root.title("MainWindow")
+        self.root.title("BookWindow")
         self.root.geometry(f"{width}x{height}")
         self.root.configure(background='pink')
 
