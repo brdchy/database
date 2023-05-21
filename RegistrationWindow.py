@@ -65,7 +65,6 @@ class RegistrationWindow:
         self.validate_login()
         self.validate_password()
         message = rq.new_user(self.login_entry.get(),self.password_entry.get())
-
         if not self.login_valid:
             self.show_error_window("Invalid login. The login must consist only of letters and numbers and be no shorter than 6 characters")
             return
@@ -73,6 +72,16 @@ class RegistrationWindow:
         if not self.password_valid:
             self.show_error_window("Invalid password. The password must consist only of letters and numbers and be no shorter than 8 characters")
             return
+        
+        # if message == "Declined":
+        #     self.show_error_window("Something went wrong. Please, try again later")
+        #     return
+        
+        # if message == "Accept":
+        #     self.show_error_window("Аccount has been registered")
+            
+       
+
 
         #Сохраняем данные пользователя в файл при нажатии на кнопку "Ok"
         # db = Database("users.txt")
