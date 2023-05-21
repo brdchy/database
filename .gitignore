@@ -3,6 +3,7 @@
 *.iml
 *.ipr
 *.iws
+venv/
 
 # VS Code
 .vscode/
