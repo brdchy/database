@@ -11,7 +11,7 @@ class Request:
         data = f"NewUser?{login}:{password}"
         self.sock.send(data.encode('utf-8'))
         response = self.sock.recv(1024)
-        return response.decode('utf-8')
+        print( response.decode('utf-8'))
     
     def entrance(self, login, password):
         data = f"Entrance?{login},{password};"
