@@ -2,6 +2,9 @@ import tkinter as tk
 
 
 from tkinter import Entry
+from Request import Request
+
+request = Request()
 
 
 class RegistrationWindow:
@@ -61,6 +64,7 @@ class RegistrationWindow:
     def save_RegistrationWindow(self):
         self.validate_login()
         self.validate_password()
+        message = request.new_user(self.login_entry.get(),self.password_entry.get())
 
         if not self.login_valid:
             self.show_error_window("Invalid login. The login must consist only of letters and numbers and be no shorter than 6 characters")

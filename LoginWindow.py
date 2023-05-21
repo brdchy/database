@@ -2,6 +2,7 @@ import tkinter as tk
 
 from BookWindow import BookWindow
 from tkinter import Entry
+from Request import Request
 
 class LoginWindow:
     def __init__(self, width=900, height=700):
