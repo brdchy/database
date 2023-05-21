@@ -8,7 +8,7 @@ class Request:
         self.sock.connect((self.host, self.port))
 
     def new_user(self, login, password):
-        data = f"NewUser?{login},{password};"
+        data = f"NewUser?{login}:{password}"
         self.sock.send(data.encode('utf-8'))
         response = self.sock.recv(1024)
         return response.decode('utf-8')
