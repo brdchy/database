@@ -19,3 +19,4 @@ venv/
 *.vshost.*
 bin/
 obj/
+*.vsidx
