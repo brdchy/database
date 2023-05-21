@@ -1,23 +1,17 @@
 import socket
 
-HOST = '127.0.0.1'  # The server's hostname or IP address
-PORT = 65432        # The port used by the server
-
-
-
 class Request:
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((HOST, PORT))
-        
-        
-    def NewUser (Request, login, password):
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:    
-            login_bytes = login[0].encode('utf-8')
-            password_bytes = password[0].encode('utf-8')
-            sendmessage = (str(login_bytes + password_bytes)[0]).encode('utf-8')
-            s.connect((HOST, PORT))
-            s.sendall((sendmessage))
+    def __init__(self, host='127.0.0.1', port=65432):
+        self.host = host
+        self.port = port
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.sock.connect((self.host, self.port))
 
+    def new_user(self, login, password):
+        data = f"NewUser?{login},{password};"
+        self.sock.send(data.encode('utf-8'))
+        response = self.sock.recv(1024)
+        return response.decode('utf-8')
 
-
-
+    def close(self):
+        self.sock.close()

@@ -3,8 +3,11 @@ from Request import Request
 
 
 
-start1 = Request()
-start1.NewUser("Login", "Password")
+request = Request()
+response = request.new_user("my_login", "my_password")
+print(response)
+request.close()
 
 
-#start = MainWindow()
+
+start = MainWindow()
