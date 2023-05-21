@@ -13,5 +13,10 @@ class Request:
         response = self.sock.recv(1024)
         return response.decode('utf-8')
 
+    def message(self, message):
+        data = f"{message}"
+        self.sock.send(data.encode('utf-8'))
+
+
     def close(self):
         self.sock.close()
