@@ -1,4 +1,7 @@
-from MainWindow import MainWindow
 from Request import Request
+from MainWindow import MainWindow
 
-start = MainWindow()
+
+
+request = Request()
+start = MainWindow(request)

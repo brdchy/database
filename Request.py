@@ -12,12 +12,20 @@ class Request:
         self.sock.send(data.encode('utf-8'))
         response = self.sock.recv(1024)
         print( response.decode('utf-8'))
-    
+
+    def message(self, message):
+        data = f"{message}"
+        self.sock.send(data.encode('utf-8'))
+
     def entrance(self, login, password):
-        data = f"Entrance?{login},{password};"
+        data = f"Entrance?{login}:{password}"
         self.sock.send(data.encode('utf-8'))
         response = self.sock.recv(1024)
-        return response.decode('utf-8')
+        print( response.decode('utf-8'))
+        return str(response.decode('utf-8'))
+
+    
+
 
 
     def close(self):

@@ -4,11 +4,12 @@ import tkinter as tk
 from tkinter import Entry
 from Request import Request
 
-rq = Request()
+
 
 
 class RegistrationWindow:
-    def __init__(self, width=900, height=700):
+    def __init__(self, request, width=900, height=700):
+        self.request = request
         self.width = width
         self.height = height
         self.root = tk.Tk()
@@ -17,6 +18,7 @@ class RegistrationWindow:
         self.root.configure(background='pink')
         self.login_valid = False
         self.password_valid = False
+        
 
         # создаем Canvas
         self.canvas = tk.Canvas(self.root, width=width, height=height)
@@ -64,7 +66,7 @@ class RegistrationWindow:
     def save_RegistrationWindow(self):
         self.validate_login()
         self.validate_password()
-        message = rq.new_user(self.login_entry.get(),self.password_entry.get())
+        
         if not self.login_valid:
             self.show_error_window("Invalid login. The login must consist only of letters and numbers and be no shorter than 6 characters")
             return
@@ -72,6 +74,8 @@ class RegistrationWindow:
         if not self.password_valid:
             self.show_error_window("Invalid password. The password must consist only of letters and numbers and be no shorter than 8 characters")
             return
+        if self.login_valid and self.password_valid:
+            self.request.new_user(self.login_entry.get(),self.password_entry.get())
         
         # if message == "Declined":
         #     self.show_error_window("Something went wrong. Please, try again later")

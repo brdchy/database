@@ -4,8 +4,10 @@ from BookWindow import BookWindow
 from tkinter import Entry
 from Request import Request
 
+
 class LoginWindow:
-    def __init__(self, width=900, height=700):
+    def __init__(self, request, width=900, height=700):
+        self.request = request
         self.width = width
         self.height = height
         self.root = tk.Tk()
@@ -14,6 +16,7 @@ class LoginWindow:
         self.root.configure(background='pink')
         self.login_valid = False
         self.password_valid = False
+        
 
         # создаем Canvas
         self.canvas = tk.Canvas(self.root, width=width, height=height)
@@ -77,22 +80,23 @@ class LoginWindow:
 
     # команда для кнопки OK
     def open_book_window(self):
-        self.validate_login()
-        self.validate_password()
+        password = self.password_entry.get()
+        login = self.login_entry.get()
+        entr = self.request.entrance(login, password)
+        
+        
+        
 
-        if not self.login_valid:
-            self.show_error_window("Wrong login. Try again")
+        if entr == "Declined!":
+            self.show_error_window("Wrong login or password. Try again")
             return
-
-        if not self.password_valid:
-            self.show_error_window("Wrong password. Try again")
-            return
-        # Скрываем главное окно
-        self.root.withdraw()
-        # создаем экземпляр класса AddWindow
-        BookWindow()
-        # Показываем главное окно после закрытия окна AddWindow
-        self.root.deiconify()
+        else:       
+            # Скрываем главное окно
+            self.root.withdraw()
+            # создаем экземпляр класса AddWindow
+            BookWindow()
+            # Показываем главное окно после закрытия окна AddWindow
+            self.root.deiconify()
 
     # устанавливаем параметры для окна ошибок
     def show_error_window(self, message):

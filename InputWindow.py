@@ -3,7 +3,7 @@ from tkinter import Entry
 
 from Request import Request
 
-rq = Request()
+
 
 class InputWindow:
     def __init__(self, width=900, height=700):

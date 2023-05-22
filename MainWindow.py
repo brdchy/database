@@ -1,17 +1,19 @@
 import tkinter as tk
+from Request import Request
 
 from LoginWindow import LoginWindow
 from RegistrationWindow import RegistrationWindow
 
 
 class MainWindow:
-    def __init__(self, width=900, height=700):
+    def __init__(self, request, width=900, height=700):
         self.width = width
         self.height = height
         self.root = tk.Tk()
         self.root.title("MainWindow")
         self.root.geometry(f"{width}x{height}")
         self.root.configure(background='pink')
+        self.request = request
 
         # создаем Canvas
         self.canvas = tk.Canvas(self.root, width=width, height=height)
@@ -58,8 +60,8 @@ class MainWindow:
 
     def open_login_window(self):
         # создаем экземпляр класса AddWindow
-        LoginWindow()
+        LoginWindow(self.request)
 
     def open_registration_window(self):
         # создаем экземпляр класса AddWindow
-        RegistrationWindow()
+        RegistrationWindow(self.request)
