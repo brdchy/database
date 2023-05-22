@@ -5,7 +5,6 @@ from LoginWindow import LoginWindow
 from RegistrationWindow import RegistrationWindow
 from AdminWindow import AdminWindow
 
-
 class MainWindow:
     def __init__(self, request, width=900, height=700):
         self.width = width
@@ -49,16 +48,15 @@ class MainWindow:
                             command=self.open_login_window)
         button2 = tk.Button(self.root, text="Registration", width=20, height=3, font=("Arial", 13),
                             command=self.open_registration_window)
-        button3 = tk.Button(self.root, text="Exit", width=8, height=2, command=self.close_window, font=("Arial", 10))
+        button3 = tk.Button(self.root, text="Admin", width=20, height=3, font=("Arial", 13), command=self.open_admin_window)   
+        button4 = tk.Button(self.root, text="Exit", width=8, height=2, command=self.close_window, font=("Arial", 10))
 
-        button4 = tk.Button(self.root, text="Admin", width=8, height=2, font=("Arial", 10), command=self.open_admin_window)
-        
+
         # добавляем кнопки на Canvas
         self.canvas.create_window(self.width // 2, self.height // 2 - 100, window=button1)
-        self.canvas.create_window(self.width // 2, self.height // 2, window=button2)
+        self.canvas.create_window(self.width // 2 - 300, self.height // 2 + 300, window=button3)
+        self.canvas.create_window(self.width // 2 + 300, self.height // 2 + 300, window=button4)
         self.canvas.create_window(self.width // 2 + 300, self.height // 2 + 300, window=button3)
-        self.canvas.create_window(self.width // 2 - 300, self.height // 2 + 300, window=button4)
-
 
     def close_window(self):
         self.root.destroy()
@@ -66,6 +64,14 @@ class MainWindow:
     def open_login_window(self):
         # создаем экземпляр класса AddWindow
         LoginWindow(self.request)
+
+    def open_admin_window(self):
+        # создаем экземпляр класса AddWindow
+        AdminWindow()
+    def open_admin_window(self):
+        # создаем экземпляр класса AddWindow
+        AdminWindow()
+
 
     def open_registration_window(self):
         # создаем экземпляр класса AddWindow
