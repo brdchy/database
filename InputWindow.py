@@ -6,7 +6,8 @@ from Request import Request
 
 
 class InputWindow:
-    def __init__(self, width=900, height=700):
+    def __init__(self, request, width=900, height=700):
+        self.request = request
         self.width = width
         self.height = height
         self.root = tk.Tk()
@@ -57,6 +58,11 @@ class InputWindow:
     def save_InputWindow(self):
         self.validate_name()
         self.validate_number()
+        number = self.number_entry.get()
+        name = self.name_entry.get()
+        time = self.selected_time.get()
+        
+        self.request.new_booking(name, number, time, "ya loh")
 
         if not self.name_valid:
             self.show_error_window("Name must contain only letters. Please try again.")

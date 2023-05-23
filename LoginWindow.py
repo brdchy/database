@@ -55,22 +55,7 @@ class LoginWindow:
         self.canvas.create_window(self.width // 2 - 300, self.height // 2 + 300, window=button1)
         self.canvas.create_window(self.width // 2 + 300, self.height // 2 + 300, window=button2)
 
-    def check_credentials(self):
-        # чтение пользователей из файла
-        with open("users.txt", "r") as file:
-            users = file.readlines()
 
-        # перебор пользователей, чтобы найти совпадение логина и пароля
-        for user in users:
-            login, password, role = user.strip().split(",")
-            if login == self.username_input.text() and password == self.password_input.text():
-                if role == "admin":
-                    # открыть окно администратора
-                    self.admin_window = BookWindow() # пока что это для проверки условия
-                else:
-                    # открыть окно пользователя
-                    self.user_window = BookWindow()
-                return True
 
 
 
@@ -94,7 +79,7 @@ class LoginWindow:
             # Скрываем главное окно
             self.root.withdraw()
             # создаем экземпляр класса AddWindow
-            BookWindow()
+            BookWindow(self.request)
             # Показываем главное окно после закрытия окна AddWindow
             self.root.deiconify()
 

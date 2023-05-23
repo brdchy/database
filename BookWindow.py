@@ -4,7 +4,8 @@ from InputWindow import InputWindow
 
 
 class BookWindow:
-    def __init__(self, width=900, height=700):
+    def __init__(self, request, width=900, height=700):
+        self.request = request
         self.width = width
         self.height = height
         self.root = tk.Tk()
@@ -58,7 +59,7 @@ class BookWindow:
         # Скрываем главное окно
         self.root.withdraw()
         # создаем экземпляр класса AddWindow
-        InputWindow()
+        InputWindow(self.request)
         # Показываем главное окно после закрытия окна AddWindow
         self.root.deiconify()
 
