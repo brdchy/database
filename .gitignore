@@ -3,6 +3,7 @@
 *.iml
 *.ipr
 *.iws
+*.pyc
 venv/
 
 # VS Code
