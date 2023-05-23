@@ -77,22 +77,6 @@ class RegistrationWindow:
         if self.login_valid and self.password_valid:
             self.request.new_user(self.login_entry.get(),self.password_entry.get())
         
-        # if message == "Declined":
-        #     self.show_error_window("Something went wrong. Please, try again later")
-        #     return
-        
-        # if message == "Accept":
-        #     self.show_error_window("Аccount has been registered")
-            
-       
-
-
-        #Сохраняем данные пользователя в файл при нажатии на кнопку "Ok"
-        # db = Database("users.txt")
-        # login = self.login_entry.get("1.0", "end-1c")
-        # password = self.password_entry.get("1.0", "end-1c")
-        # db.write(f"{login}:{password}")
-        # Скрываем главное окно
         self.root.withdraw()
 
     # устанавливаем параметры для окна ошибок

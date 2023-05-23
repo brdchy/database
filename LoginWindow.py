@@ -68,9 +68,6 @@ class LoginWindow:
         password = self.password_entry.get()
         login = self.login_entry.get()
         entr = self.request.entrance(login, password)
-        
-        
-        
 
         if entr == "Declined!":
             self.show_error_window("Wrong login or password. Try again")

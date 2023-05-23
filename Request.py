@@ -25,7 +25,7 @@ class Request:
         return str(response.decode('utf-8'))
 
     def new_booking(self, name, phone, time, notes):
-        data = f"NewBooking?{name}:{phone}:{time}:{notes}"
+        data = f"NewBooking?{name},{phone},{time},{notes}"
         self.sock.send(data.encode('utf-8'))
         response = self.sock.recv(1024)
         print(response.decode('utf-8'))
