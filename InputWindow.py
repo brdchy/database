@@ -71,7 +71,7 @@ class InputWindow:
         if not self.number_valid:
             self.show_error_window("Number must be equal to 11 characters and contain only numbers. Please try again.")
             return
-        # message = rq.book(self.name_entry.get(),self.number_entry.get(), )
+        
 
     def close_InputWindow(self):
         # Скрываем главное окно

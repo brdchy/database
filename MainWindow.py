@@ -3,6 +3,7 @@ from Request import Request
 
 from LoginWindow import LoginWindow
 from RegistrationWindow import RegistrationWindow
+from AdminWindow import AdminWindow
 
 
 class MainWindow:
@@ -50,10 +51,14 @@ class MainWindow:
                             command=self.open_registration_window)
         button3 = tk.Button(self.root, text="Exit", width=8, height=2, command=self.close_window, font=("Arial", 10))
 
+        button4 = tk.Button(self.root, text="Admin", width=8, height=2, font=("Arial", 10), command=self.open_admin_window)
+        
         # добавляем кнопки на Canvas
         self.canvas.create_window(self.width // 2, self.height // 2 - 100, window=button1)
         self.canvas.create_window(self.width // 2, self.height // 2, window=button2)
         self.canvas.create_window(self.width // 2 + 300, self.height // 2 + 300, window=button3)
+        self.canvas.create_window(self.width // 2 - 300, self.height // 2 + 300, window=button4)
+
 
     def close_window(self):
         self.root.destroy()
@@ -65,3 +70,6 @@ class MainWindow:
     def open_registration_window(self):
         # создаем экземпляр класса AddWindow
         RegistrationWindow(self.request)
+
+    def open_admin_window(self):
+        AdminWindow()
