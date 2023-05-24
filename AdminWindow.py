@@ -79,5 +79,5 @@ class AdminWindow:
     def remove_user(self):
         user = str(self.selected_user.get())
         self.request.DeleteUser(user.split(':')[0])
-
+        
 
