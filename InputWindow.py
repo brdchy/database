@@ -70,10 +70,10 @@ class InputWindow:
             
             number = self.number_entry.get()
             name = self.name_entry.get()
-            # тут наебучи нужно еще передовать стол
+            table = self.selected_table.get()
             time = self.selected_time.get()
             notes = self.notes_entry.get('1.0', 'end-1c')
-            self.request.new_booking(name, number, time, notes)
+            self.request.new_booking(name, number, table, time, notes)
 
        
         
@@ -137,7 +137,9 @@ class InputWindow:
 
         #выпадающий список свободных столов
         self.selected_table = tk.StringVar(frame2)
-        tables = ["", "1", "2", "3", "4", "5"]
+        table_list = self.request.UnloadTables()
+        tables = [""]
+        tables.extend(table_list)
         self.selected_table.set(tables[0])
         tables_menu = tk.OptionMenu(frame2, self.selected_table, *tables)
         tables_menu.config(width=40, font=("Arial", 11))
