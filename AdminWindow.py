@@ -46,7 +46,7 @@ class AdminWindow:
     def create_buttons(self):
         # создаем кнопки
         button1 = tk.Button(self.root, text="Cancel", width=15, height=3, font=("Arial", 9), command=self.close_AdminWindow)
-        button2 = tk.Button(self.root, text="delete", width=15, height=3, font=("Arial", 9))#, #command=self.)
+        button2 = tk.Button(self.root, text="delete", width=15, height=3, font=("Arial", 9), command = self.remove_user)
 
         # добавляем кнопки на Canvas
         self.canvas.create_window(self.width//2 + 300, self.height//2 + 300, window=button1)
@@ -75,3 +75,9 @@ class AdminWindow:
     def close_AdminWindow(self):
         # Скрываем главное окно
         self.root.withdraw()
+
+    def remove_user(self):
+        user = str(self.selected_user.get())
+        self.request.DeleteUser(user.split(':')[0])
+
+

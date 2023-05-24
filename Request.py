@@ -58,6 +58,12 @@ class Request:
         tables = str(response.decode('utf-8'))
         table_list = tables.split('\n')
         return table_list
+    
+    def DeleteUser(self, login):
+        data = f"DeleteUser?{login}"
+        self.sock.send(data.encode('utf-8'))
+        response = self.sock.recv(1024)
+        print(response.decode('utf-8'))
 
     def DeleatUser(self, login):
         data = f"DeleatUser?{login}"
