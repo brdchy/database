@@ -66,6 +66,9 @@ class RegistrationWindow:
     def save_RegistrationWindow(self):
         self.validate_login()
         self.validate_password()
+        login = self.login_entry.get()
+        password = self.password_entry.get()
+         
         
         if not self.login_valid:
             self.show_error_window("Invalid login. The login must consist only of letters and numbers and be no shorter than 6 characters")
@@ -75,7 +78,10 @@ class RegistrationWindow:
             self.show_error_window("Invalid password. The password must consist only of letters and numbers and be no shorter than 8 characters")
             return
         if self.login_valid and self.password_valid:
-            self.request.new_user(self.login_entry.get(),self.password_entry.get())
+            reg = self.request.new_user(login, password)
+            if reg == "Account created!":
+                self.request.new_user(login,password)
+            else: return
         
         self.root.withdraw()
 
