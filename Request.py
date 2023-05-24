@@ -59,6 +59,11 @@ class Request:
         table_list = tables.split('\n')
         return table_list
 
+    def DeleatUser(self, login):
+        data = f"DeleatUser?{login}"
+        self.sock.send(data.encode('utf-8'))
+        response = self.sock.recv(1024)
+        print(response.decode('utf-8'))
 
     def close(self):
         self.sock.close()
