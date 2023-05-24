@@ -37,16 +37,16 @@ class Request:
         self.sock.send(data.encode('utf-8'))
         response = self.sock.recv(1024)
         print(response.decode('utf-8'))
+
     def UnloadUsers(self):
         data = "UnloadUsers?"
         self.sock.send(data.encode('utf-8'))
         response = self.sock.recv(1024)
-        print(response.decode('utf-8'))
-
-
-
+        users = str(response.decode('utf-8'))
+        user_list = users.split('\n')
+        return user_list
     
-
+        #print(response.decode('utf-8'))
 
 
     def close(self):

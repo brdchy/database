@@ -70,6 +70,7 @@ class InputWindow:
             
             number = self.number_entry.get()
             name = self.name_entry.get()
+            # тут наебучи нужно еще передовать стол
             time = self.selected_time.get()
             notes = self.notes_entry.get('1.0', 'end-1c')
             self.request.new_booking(name, number, time, notes)
@@ -118,8 +119,9 @@ class InputWindow:
 
         tk.Label(frame1, text="Name:", font=("Arial", 12)).grid(row=0, column=0, sticky=tk.E, pady=10)
         tk.Label(frame1, text="Phone number:", font=("Arial", 12)).grid(row=1, column=0, sticky=tk.E, pady=10)
-        tk.Label(frame1, text="Time:", font=("Arial", 12)).grid(row=2, column=0, sticky=tk.E, pady=10)
-        tk.Label(frame1, text="Notes:", font=("Arial", 12)).grid(row=3, column=0, sticky=tk.NE, pady=10)
+        tk.Label(frame1, text="Table:", font=("Arial", 12)).grid(row=2, column=0, sticky=tk.E, pady=10)
+        tk.Label(frame1, text="Time:", font=("Arial", 12)).grid(row=3, column=0, sticky=tk.E, pady=10)
+        tk.Label(frame1, text="Notes:", font=("Arial", 12)).grid(row=4, column=0, sticky=tk.NE, pady=10)
         self.canvas.create_window(200, 300, window=frame1)
 
         # блок с полями ввода
@@ -133,16 +135,25 @@ class InputWindow:
         self.number_entry.grid(row=1, column=1, pady=10)
         self.number_entry.bind("<FocusOut>", lambda event: self.validate_number())
 
-        # выпадающий список
+        #выпадающий список свободных столов
+        self.selected_table = tk.StringVar(frame2)
+        tables = ["", "1", "2", "3", "4", "5"]
+        self.selected_table.set(tables[0])
+        tables_menu = tk.OptionMenu(frame2, self.selected_table, *tables)
+        tables_menu.config(width=40, font=("Arial", 11))
+        tables_menu.grid(row=2, column=1, pady=10)
+        
+
+        # выпадающий список времени столов
         self.selected_time = tk.StringVar(frame2)
         times = ["", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00"]
         self.selected_time.set(times[0])
         time_menu = tk.OptionMenu(frame2, self.selected_time, *times)
         time_menu.config(width=40, font=("Arial", 11))
-        time_menu.grid(row=2, column=1, pady=10)
+        time_menu.grid(row=3, column=1, pady=10)
 
         self.notes_entry = tk.Text(frame2, width=40, height=3, font=("Arial", 12))
-        self.notes_entry.grid(row=3, column=1, pady=10)
+        self.notes_entry.grid(row=4, column=1, pady=10)
 
         self.canvas.create_window(500, 315, window=frame2)
 

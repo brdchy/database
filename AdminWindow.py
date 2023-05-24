@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
 from Request import Request
+from tkinter import Entry
+
 
 
 
@@ -22,7 +24,7 @@ class AdminWindow:
 
         self.draw_walls()
         self.create_buttons()
-        
+        self.create_input_field()
         self.root.mainloop()
         
     
@@ -51,6 +53,26 @@ class AdminWindow:
         self.canvas.create_window(self.width//2 + 300, self.height//2, window=button1)
         self.canvas.create_window(self.width//2 + 300, self.height//2 + 300, window=button2)
         self.canvas.create_window(self.width//2 + 300, self.height//2 - 70, window=button3)
+
+    def create_input_field(self):
+        
+        # блок с названиями
+        frame1 = tk.Frame(self.root, background="pink")
+
+        tk.Label(frame1, text="Use:", font=("Arial", 12)).grid(row=0, column=0, sticky=tk.E, pady=10)
+        self.canvas.create_window(100, 100, window=frame1)
+        
+        #создаётся выпадающий список
+        user_list = self.request.UnloadUsers()
+        frame2 = tk.Frame(self.root, background="pink")
+        self.selected_user = tk.StringVar(frame2)
+        users = [""]
+        users.extend(user_list)
+        self.selected_user.set(users[0])
+        users_menu = tk.OptionMenu(frame2, self.selected_user, *users)
+        users_menu.config(width=40, font=("Arial", 11))
+        users_menu.grid(row=1, column=1, pady=10)
+        self.canvas.create_window(500, 315, window=frame2)
         
     def close_AdminWindow(self):
         # Скрываем главное окно
