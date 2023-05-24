@@ -58,12 +58,6 @@ class InputWindow:
     def save_InputWindow(self):
         self.validate_name()
         self.validate_number()
-        number = self.number_entry.get()
-        name = self.name_entry.get()
-        time = self.selected_time.get()
-        
-        self.request.new_booking(name, number, time, "ya loh")
-
         if not self.name_valid:
             self.show_error_window("Name must contain only letters. Please try again.")
             return
@@ -71,6 +65,16 @@ class InputWindow:
         if not self.number_valid:
             self.show_error_window("Number must be equal to 11 characters and contain only numbers. Please try again.")
             return
+
+        if self.number_valid and self.name_valid:
+            
+            number = self.number_entry.get()
+            name = self.name_entry.get()
+            time = self.selected_time.get()
+            notes = self.notes_entry.get('1.0', 'end-1c')
+            self.request.new_booking(name, number, time, notes)
+
+       
         
 
     def close_InputWindow(self):

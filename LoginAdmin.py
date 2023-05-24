@@ -68,14 +68,17 @@ class LoginAdmin:
     def open_admin_window(self):
         password = self.password_entry.get()
         login = self.login_entry.get()
-        entr = self.request.entrance(login, password)
+        entr = self.request.admin_entrance(login, password)
 
         
-        if login == "admin" and password == "admin":
+        if entr == "Admin entered!":
             AdminWindow()
-        else:
-            messagebox.showerror("Ошибка", "Неверный логин или пароль")
-
+        elif entr == "You don't have admin permissions":
+            self.show_error_window("You don't have admin permissions!")
+            return
+        else: 
+            self.show_error_window("Check if login or password is correct")
+            return
     # устанавливаем параметры для окна ошибок
     def show_error_window(self, message):
         error_window = tk.Toplevel(self.root)

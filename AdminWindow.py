@@ -20,7 +20,7 @@ class AdminWindow:
 
         self.draw_walls()
         self.create_buttons()
-        self.create_input_field()
+        
         self.root.mainloop()
         
     
