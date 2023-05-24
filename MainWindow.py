@@ -2,8 +2,8 @@ import tkinter as tk
 from Request import Request
 
 from LoginWindow import LoginWindow
+from LoginAdmin import LoginAdmin
 from RegistrationWindow import RegistrationWindow
-from AdminWindow import AdminWindow
 
 class MainWindow:
     def __init__(self, request, width=900, height=700):
@@ -48,7 +48,7 @@ class MainWindow:
                             command=self.open_login_window)
         button2 = tk.Button(self.root, text="Registration", width=20, height=3, font=("Arial", 13),
                             command=self.open_registration_window)
-        button3 = tk.Button(self.root, text="Admin", width=10, height=2, font=("Arial", 13), command=self.open_admin_window)   
+        button3 = tk.Button(self.root, text="Admin", width=10, height=2, font=("Arial", 13), command=self.open_adminlog_window)   
         button4 = tk.Button(self.root, text="Exit", width=8, height=2, command=self.close_window, font=("Arial", 10))
 
 
@@ -65,9 +65,9 @@ class MainWindow:
         # создаем экземпляр класса AddWindow
         LoginWindow(self.request)
 
-    def open_admin_window(self):
+    def open_adminlog_window(self):
         # создаем экземпляр класса AddWindow
-        AdminWindow()
+        LoginAdmin(self.request)
 
     def open_registration_window(self):
         # создаем экземпляр класса AddWindow
