@@ -73,10 +73,14 @@ class InputWindow:
             table = self.selected_table.get()
             time = self.selected_time.get()
             notes = self.notes_entry.get('1.0', 'end-1c')
-            self.request.new_booking(name, number, table, time, notes)
-
-       
-        
+            book = self.request.new_booking(name, number, table, time, notes)
+            if (book == "T"):
+                self.show_error_window("You have booked a table")
+                self.root.withdraw()
+            else:
+                self.show_error_window("This table is booked")
+            
+              
 
     def close_InputWindow(self):
         # Скрываем главное окно

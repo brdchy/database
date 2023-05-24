@@ -57,7 +57,7 @@ class BookWindow:
 
     def open_input_window(self):
         # Скрываем главное окно
-        self.root.withdraw()
+        #self.root.withdraw()
         # создаем экземпляр класса AddWindow
         InputWindow(self.request)
         # Показываем главное окно после закрытия окна AddWindow

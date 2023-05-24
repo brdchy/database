@@ -38,7 +38,8 @@ class Request:
         data = f"NewBooking?{name},{phone},{table},{time},{notes}"
         self.sock.send(data.encode('utf-8'))
         response = self.sock.recv(1024)
-        print(response.decode('utf-8'))
+        book = str(response.decode('utf-8'))
+        return book
 
     def UnloadUsers(self):
         data = "UnloadUsers?"
