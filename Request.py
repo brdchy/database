@@ -1,4 +1,6 @@
+from msilib.schema import tables
 import socket
+from urllib import response
 
 class Request:
     def __init__(self, host='127.0.0.1', port=65432):
@@ -47,6 +49,14 @@ class Request:
         return user_list
     
         #print(response.decode('utf-8'))
+
+    def UnloadTables(self):
+        data = "UnloadTables?"
+        self.sock.send(data.encode('utf-8'))
+        response = self.sock.recv(1024)
+        tables = str(response.decode('utf-8'))
+        table_list = tables.split('\n')
+        return table_list
 
 
     def close(self):
