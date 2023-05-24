@@ -24,3 +24,5 @@ obj/
 /.vs/newdb/FileContentIndex/e0b2860d-aa24-4055-aeaa-53938ab6ef5b.vsidx
 /.vs/newdb/FileContentIndex/56a3e004-9c98-4987-9e0d-81ffcbf3c656.vsidx
 /.vs/newdb/v17/.wsuo
+__pycache__/
+
