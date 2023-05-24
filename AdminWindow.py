@@ -1,12 +1,14 @@
 import tkinter as tk
 from tkinter import messagebox
+from Request import Request
 
 
 
 class AdminWindow:
-    def __init__(self, width=900, height=700):
+    def __init__(self, request, width=900, height=700):
         self.width = width
         self.height = height
+        self.request = request
         self.root = tk.Tk()
         self.root.title("Admin Window")
         self.root.geometry(f"{width}x{height}")
@@ -41,7 +43,7 @@ class AdminWindow:
         
     def create_buttons(self):
         # создаем кнопки
-        button1 = tk.Button(self.root, text="Change", width=15, height=3, font=("Arial", 9))#, command=self.open_book_window)
+        button1 = tk.Button(self.root, text="Change", width=15, height=3, font=("Arial", 9), command=self.request.UnloadUsers)
         button2 = tk.Button(self.root, text="Cancel", width=15, height=3, font=("Arial", 9), command=self.close_AdminWindow)
         button3 = tk.Button(self.root, text="delete", width=15, height=3, font=("Arial", 9))#, #command=self.)
 

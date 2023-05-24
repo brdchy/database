@@ -72,7 +72,7 @@ class LoginAdmin:
 
         
         if entr == "Admin entered!":
-            AdminWindow()
+            AdminWindow(self.request)
         elif entr == "You don't have admin permissions":
             self.show_error_window("You don't have admin permissions!")
             return
